@@ -1,0 +1,18 @@
+{
+  "name": "webpack-boilerplate",
+  "version": "0.0.0",
+  "description": "A boilerplate for web front-end, based on Webpack",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsktschy/webpack-boilerplate.git"
+  },
+  "author": "dsktschy (https://github.com/dsktschy)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dsktschy/webpack-boilerplate/issues"
+  },
+  "homepage": "https://github.com/dsktschy/webpack-boilerplate#readme"
+}
