@@ -1,0 +1,13 @@
+.husky/
+dist/
+node_modules/
+.gitignore
+.gitkeep
+.prettierignore
+LICENSE
+package-lock.json
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
