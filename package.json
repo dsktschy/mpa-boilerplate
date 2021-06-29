@@ -28,7 +28,8 @@
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.1",
     "webpack": "^5.40.0",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "webpack-manifest-plugin": "^3.1.1"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix --max-warnings=0",

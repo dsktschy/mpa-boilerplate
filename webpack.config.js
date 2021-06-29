@@ -1,5 +1,6 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
@@ -12,9 +13,18 @@ const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
     template,
     filename,
     inject: false,
-    templateParameters: {
-      ...templateParameters
-    }
+    templateParameters: ({ hash }) => ({
+      ...templateParameters,
+      /**
+       * Create hashed assets path
+       */
+      h: (_path = '') => {
+        if (!_path) return ''
+        const { dir, name, ext } = path.parse(_path)
+        if (dir) return `${dir}/${name}.${hash}${ext}`
+        return `${name}.${hash}${ext}`
+      }
+    })
   })
 
 module.exports = {
@@ -32,6 +42,11 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
+
+    new WebpackManifestPlugin({
+      // https://github.com/shellscape/webpack-manifest-plugin/issues/229
+      publicPath: ''
+    }),
 
     new CopyPlugin({
       patterns: [

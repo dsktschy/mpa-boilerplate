@@ -1,3 +1,7 @@
+<?php
+// This line should be removed in WordPress project
+require_once dirname(__FILE__) . '/inc/h.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +10,6 @@
   <title>Webpack Boilerplate</title>
 </head>
 <body>
-  <script src="/assets/scripts/app.js"></script>
+  <script src="<?= h('/assets/scripts/app.js') ?>"></script>
 </body>
 </html>
