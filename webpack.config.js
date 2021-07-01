@@ -1,12 +1,18 @@
 const path = require('path')
+const dotenv = require('dotenv')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
-const srcRelativePath = 'src'
-const publicRelativePath = 'public'
-const distRelativePath = 'dist'
+dotenv.config()
+
+const srcRelativePath =
+  process.env.WEBPACK_SRC_RELATIVE_PATH?.replace(/\/$/, '') || 'src'
+const publicRelativePath =
+  process.env.WEBPACK_PUBLIC_RELATIVE_PATH?.replace(/\/$/, '') || 'public'
+const distRelativePath =
+  process.env.WEBPACK_DIST_RELATIVE_PATH?.replace(/\/$/, '') || 'dist'
 
 const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
   new HtmlWebpackPlugin({

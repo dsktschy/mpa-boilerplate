@@ -18,9 +18,13 @@
     "url": "https://github.com/dsktschy/webpack-boilerplate/issues"
   },
   "homepage": "https://github.com/dsktschy/webpack-boilerplate#readme",
+  "engines": {
+    "node": ">=14"
+  },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.1",
+    "dotenv": "^10.0.0",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "html-webpack-plugin": "^5.3.2",
