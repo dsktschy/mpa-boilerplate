@@ -38,7 +38,7 @@ module.exports = {
   entry: {
     'assets/scripts/app': path.resolve(
       __dirname,
-      `${srcRelativePath}/assets/main.js`
+      `${srcRelativePath}/assets/main.ts`
     )
   },
 
@@ -46,6 +46,34 @@ module.exports = {
     path: path.resolve(__dirname, distRelativePath),
     filename: '[name].[fullhash].js'
   },
+
+  module: {
+    rules: [
+      {
+        test: [/\.ts$/, /\.js$/],
+        exclude: /node_modules/,
+        use: [
+          typeof process.env.WEBPACK_LEGACY === 'undefined'
+            ? {
+                loader: 'esbuild-loader',
+                options: {
+                  loader: 'ts'
+                }
+              }
+            : 'ts-loader'
+        ]
+      }
+    ]
+  },
+
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+
+  target:
+    typeof process.env.WEBPACK_LEGACY === 'undefined'
+      ? ['web']
+      : ['web', 'es5'],
 
   plugins: [
     new BrowserSyncPlugin({
