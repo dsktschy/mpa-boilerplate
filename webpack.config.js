@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 dotenv.config()
 
@@ -36,15 +37,12 @@ const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
 
 module.exports = {
   entry: {
-    'assets/scripts/app': path.resolve(
-      __dirname,
-      `${srcRelativePath}/assets/main.ts`
-    )
+    app: path.resolve(__dirname, `${srcRelativePath}/assets/main.ts`)
   },
 
   output: {
     path: path.resolve(__dirname, distRelativePath),
-    filename: '[name].[fullhash].js'
+    filename: 'assets/scripts/[name].[fullhash].js'
   },
 
   module: {
@@ -61,6 +59,25 @@ module.exports = {
                 }
               }
             : 'ts-loader'
+        ]
+      },
+      {
+        test: [/\.s[ac]ss$/, /\.css$/],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                config:
+                  typeof process.env.WEBPACK_LEGACY === 'undefined'
+                    ? path.resolve(__dirname, '.postcssrc.js')
+                    : path.resolve(__dirname, '.postcssrc.legacy.js')
+              }
+            }
+          },
+          'sass-loader'
         ]
       }
     ]
@@ -115,6 +132,10 @@ module.exports = {
     createHtmlWebpackPlugin(
       path.resolve(__dirname, `${srcRelativePath}/templates/index.ejs`),
       'index.html'
-    )
+    ),
+
+    new MiniCssExtractPlugin({
+      filename: 'assets/stylesheets/[name].[fullhash].css'
+    })
   ]
 }
