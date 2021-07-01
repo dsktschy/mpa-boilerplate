@@ -1,5 +1,6 @@
 const path = require('path')
 const dotenv = require('dotenv')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -47,6 +48,26 @@ module.exports = {
   },
 
   plugins: [
+    new BrowserSyncPlugin({
+      host: process.env.WEBPACK_BROWSER_SYNC_HOST || 'localhost',
+      port: process.env.WEBPACK_BROWSER_SYNC_PORT || 3000,
+      proxy: process.env.WEBPACK_BROWSER_SYNC_PROXY || false,
+      server: process.env.WEBPACK_BROWSER_SYNC_PROXY ? false : distRelativePath,
+      https:
+        !!process.env.WEBPACK_BROWSER_SYNC_HTTPS_CERT &&
+        !!process.env.WEBPACK_BROWSER_SYNC_HTTPS_KEY
+          ? {
+              cert: process.env.WEBPACK_BROWSER_SYNC_HTTPS_CERT,
+              key: process.env.WEBPACK_BROWSER_SYNC_HTTPS_KEY
+            }
+          : false,
+      open: false,
+      // This setting doesn't work now
+      // Reloading connot be avoid even if changed file is CSS
+      // https://github.com/Va1/browser-sync-webpack-plugin/pull/79
+      injectChanges: true
+    }),
+
     new CleanWebpackPlugin(),
 
     new WebpackManifestPlugin({
