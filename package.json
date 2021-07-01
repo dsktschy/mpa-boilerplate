@@ -22,6 +22,8 @@
     "node": ">=14"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "browser-sync-webpack-plugin": "^2.3.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^9.0.1",
