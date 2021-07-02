@@ -21,5 +21,9 @@ module.exports = {
       `prettier -w ${files.join(' ')}`
     ]
   },
-  '*.{css,md}': ['prettier --write']
+  '**/*.{scss,css}': files => [
+    `stylelint ${files.join(' ')}`,
+    `prettier -w ${files.join(' ')}`
+  ],
+  '*.md': ['prettier --write']
 }
