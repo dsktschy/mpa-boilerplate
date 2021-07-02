@@ -15,7 +15,12 @@ const publicRelativePath =
   process.env.WEBPACK_PUBLIC_RELATIVE_PATH?.replace(/\/$/, '') || 'public'
 const distRelativePath =
   process.env.WEBPACK_DIST_RELATIVE_PATH?.replace(/\/$/, '') || 'dist'
+const scriptManifestKeyPrefix = 'assets/scripts/'
+const stylesheetManifestKeyPrefix = 'assets/stylesheets/'
 
+/**
+ * Create instance of html-webpack-plugin to provide common parameters
+ */
 const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
   new HtmlWebpackPlugin({
     template,
@@ -35,9 +40,36 @@ const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
     })
   })
 
-module.exports = {
+/**
+ * Override generated manifest.json
+ * Because keys of entry files are not relative path, but only filename
+ */
+const optimizeManifests = (seed, files) => {
+  const manifests = {}
+  const scriptNameList = []
+  const stylesheetNameList = []
+  for (const entryKey of Object.keys(config.entry)) {
+    scriptNameList.push(`${entryKey}.js`)
+    stylesheetNameList.push(`${entryKey}.css`)
+  }
+  for (const file of files) {
+    let name = file.name
+    if (file.isChunk) {
+      if (scriptNameList.includes(file.name)) {
+        name = `${scriptManifestKeyPrefix}${file.name}`
+      } else if (stylesheetNameList.includes(file.name)) {
+        name = `${stylesheetManifestKeyPrefix}${file.name}`
+      }
+    }
+    manifests[name] = file.path
+  }
+  return manifests
+}
+
+const config = {
   entry: {
-    app: path.resolve(__dirname, `${srcRelativePath}/assets/main.ts`)
+    index: path.resolve(__dirname, `${srcRelativePath}/assets/index.ts`),
+    foobar: path.resolve(__dirname, `${srcRelativePath}/assets/foobar.ts`)
   },
 
   output: {
@@ -115,11 +147,6 @@ module.exports = {
 
     new CleanWebpackPlugin(),
 
-    new WebpackManifestPlugin({
-      // https://github.com/shellscape/webpack-manifest-plugin/issues/229
-      publicPath: ''
-    }),
-
     new CopyPlugin({
       patterns: [
         {
@@ -134,8 +161,23 @@ module.exports = {
       'index.html'
     ),
 
+    createHtmlWebpackPlugin(
+      path.resolve(__dirname, `${srcRelativePath}/templates/foobar.ejs`),
+      'foobar.html'
+    ),
+
     new MiniCssExtractPlugin({
       filename: 'assets/stylesheets/[name].[fullhash].css'
     })
   ]
 }
+
+config.plugins.push(
+  new WebpackManifestPlugin({
+    generate: optimizeManifests,
+    // https://github.com/shellscape/webpack-manifest-plugin/issues/229
+    publicPath: ''
+  })
+)
+
+module.exports = config

@@ -1,0 +1,8 @@
+@use './common.scss';
+
+.heading {
+  cursor: pointer;
+  &.is-active {
+    animation: 0.5s linear infinite rainbow;
+  }
+}
