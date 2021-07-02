@@ -1,4 +1,6 @@
-document.body.classList.add('is-ready')
-document.body.addEventListener('click', () => {
-  document.body.classList.add('is-clicked')
-})
+const headingEl = document.querySelector('.heading')
+if (headingEl) {
+  headingEl.addEventListener('click', () => {
+    headingEl.classList.add('is-active')
+  })
+}

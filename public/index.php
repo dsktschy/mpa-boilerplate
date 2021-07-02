@@ -11,7 +11,7 @@ require_once dirname(__FILE__) . '/inc/h.php';
   <link href="<?= h('/assets/stylesheets/app.css') ?>" rel="stylesheet">
 </head>
 <body>
-  <h1>Webpack Boilerplate</h1>
+  <h1 class="heading">Webpack Boilerplate</h1>
   <script src="<?= h('/assets/scripts/app.js') ?>"></script>
 </body>
 </html>

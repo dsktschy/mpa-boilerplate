@@ -25,8 +25,9 @@
   }
 }
 
-body {
-  &.is-ready {
-    animation: 3s linear infinite rainbow;
+.heading {
+  cursor: pointer;
+  &.is-active {
+    animation: 0.5s linear infinite rainbow;
   }
 }
