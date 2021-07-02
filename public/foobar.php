@@ -12,6 +12,10 @@ require_once dirname(__FILE__) . '/inc/h.php';
 </head>
 <body>
   <h1 class="heading">Foobar | Webpack Boilerplate</h1>
+  <picture>
+    <source type="image/webp" srcset="<?= h('/assets/images/logo.webp') ?>" />
+    <img src="<?= h('/assets/images/logo.jpg') ?>" />
+  </picture>
   <a href="index.php">Index</a>
   <script src="<?= h('/assets/scripts/foobar.js') ?>"></script>
 </body>
