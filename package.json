@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "prepare": "husky install",
-    "build": "webpack --mode=production",
-    "dev": "webpack --mode=development --watch"
+    "build": "webpack --node-env=production",
+    "dev": "webpack --node-env=development --watch"
   },
   "repository": {
     "type": "git",
