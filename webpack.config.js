@@ -205,6 +205,7 @@ const config = {
             }
           : false,
       open: false,
+      files: [distRelativePath],
       // This setting doesn't work now
       // Reloading connot be avoid even if changed file is CSS
       // https://github.com/Va1/browser-sync-webpack-plugin/pull/79
