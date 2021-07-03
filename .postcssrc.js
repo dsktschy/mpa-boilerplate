@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
     require('postcss-preset-env')({
-      browsers: 'defaults'
+      browsers: 'defaults, not IE 11'
     })
   ]
 }
