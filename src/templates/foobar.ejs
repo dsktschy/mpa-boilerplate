@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Foobar | Webpack Boilerplate</title>
-  <link href="<%- h('/assets/stylesheets/foobar.css') %>" rel="stylesheet">
+  <link href="<%- h('assets/stylesheets/foobar.css') %>" rel="stylesheet">
 </head>
 <body>
   <%= compilation.assets[h('assets/sprites/foobar.svg')].source() %>
@@ -12,8 +12,8 @@
   <h1 class="heading">Foobar | Webpack Boilerplate</h1>
 
   <picture>
-    <source type="image/webp" srcset="<%- h('/assets/images/logo.webp') %>" />
-    <img src="<%- h('/assets/images/logo.jpg') %>" class="image"/>
+    <source type="image/webp" srcset="<%- h('assets/images/logo.webp') %>" />
+    <img src="<%- h('assets/images/logo.jpg') %>" class="image"/>
   </picture>
 
   <ul class="link-list">
@@ -37,6 +37,6 @@
     </li>
   </ul>
 
-  <script src="<%- h('/assets/scripts/foobar.js') %>"></script>
+  <script src="<%- h('assets/scripts/foobar.js') %>"></script>
 </body>
 </html>

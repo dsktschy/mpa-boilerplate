@@ -45,10 +45,22 @@ const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
        * Create hashed assets path
        */
       h: (_path = '') => {
-        if (!_path) return ''
-        const { dir, name, ext } = path.parse(_path)
-        if (dir) return `${dir}/${name}.${compilation.hash}${ext}`
-        return `${name}.${compilation.hash}${ext}`
+        const rootRelative = _path.startsWith('/')
+        const relativePath = rootRelative ? _path.slice(1) : _path
+        if (!relativePath) {
+          console.error(`\`${_path}\` doesn't exist in manifest.json.`)
+          return ''
+        }
+        const { dir, name, ext } = path.parse(relativePath)
+        const hashedRelativePath = dir
+          ? `${dir}/${name}.${compilation.hash}${ext}`
+          : `${name}.${compilation.hash}${ext}`
+        // Non-hashed assets
+        if (!Object.keys(compilation.assets).includes(hashedRelativePath)) {
+          return _path
+        }
+        // Hashed assets
+        return (rootRelative ? '/' : '') + hashedRelativePath
       },
 
       // Custom parameters per page

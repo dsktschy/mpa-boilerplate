@@ -8,22 +8,22 @@ require_once dirname(__FILE__) . '/inc/h.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Foobar | Webpack Boilerplate</title>
-  <link href="<?= h('/assets/stylesheets/foobar.css') ?>" rel="stylesheet">
+  <link href="<?= h('assets/stylesheets/foobar.css') ?>" rel="stylesheet">
 </head>
 <body>
   <?php
     $documentRootPath = function_exists('get_stylesheet_directory')
       ? get_stylesheet_directory()
       : dirname(__FILE__);
-    $spriteSvgPath = $documentRootPath . '/' . h('assets/sprites/foobar.svg');
+    $spriteSvgPath = $documentRootPath . h('/assets/sprites/foobar.svg', false);
     if (file_exists($spriteSvgPath)) echo file_get_contents($spriteSvgPath);
   ?>
 
   <h1 class="heading">Foobar | Webpack Boilerplate</h1>
 
   <picture>
-    <source type="image/webp" srcset="<?= h('/assets/images/logo.webp') ?>" />
-    <img src="<?= h('/assets/images/logo.jpg') ?>" class="image"/>
+    <source type="image/webp" srcset="<?= h('assets/images/logo.webp') ?>" />
+    <img src="<?= h('assets/images/logo.jpg') ?>" class="image"/>
   </picture>
 
   <ul class="link-list">
@@ -47,6 +47,6 @@ require_once dirname(__FILE__) . '/inc/h.php';
     </li>
   </ul>
 
-  <script src="<?= h('/assets/scripts/foobar.js') ?>"></script>
+  <script src="<?= h('assets/scripts/foobar.js') ?>"></script>
 </body>
 </html>
