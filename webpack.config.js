@@ -7,7 +7,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { ImagePool, encoders } = require('@squoosh/lib')
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const squooshConfig = require('./.squooshrc.js')
+const svgoConfig = require('./.svgorc.js')
 
 dotenv.config()
 
@@ -21,25 +23,49 @@ const scriptManifestKeyPrefix = 'assets/scripts/'
 const stylesheetManifestKeyPrefix = 'assets/stylesheets/'
 
 /**
- * Create instance of html-webpack-plugin to provide common parameters
+ * Create instance of html-webpack-plugin to set common options
  */
 const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
   new HtmlWebpackPlugin({
     template,
     filename,
     inject: false,
-    templateParameters: ({ hash }) => ({
-      ...templateParameters,
+    templateParameters: (compilation, assets, assetTags, options) => ({
+      // Default parameters
+      // https://github.com/jantimon/html-webpack-plugin/blob/0a6568d587a82d88fd3a0617234ca98d26a1e0a6/index.js#L1098
+      compilation,
+      webpackConfig: compilation.options,
+      htmlWebpackPlugin: {
+        tags: assetTags,
+        files: assets,
+        options
+      },
+
       /**
        * Create hashed assets path
        */
       h: (_path = '') => {
         if (!_path) return ''
         const { dir, name, ext } = path.parse(_path)
-        if (dir) return `${dir}/${name}.${hash}${ext}`
-        return `${name}.${hash}${ext}`
-      }
+        if (dir) return `${dir}/${name}.${compilation.hash}${ext}`
+        return `${name}.${compilation.hash}${ext}`
+      },
+
+      // Custom parameters per page
+      ...templateParameters
     })
+  })
+
+/**
+ * Create instance of svg-spritemap-webpack-plugin to set common options
+ */
+const createSVGSpritemapPlugin = (input, filename) =>
+  new SVGSpritemapPlugin(input, {
+    output: {
+      filename,
+      svgo: svgoConfig,
+      svg4everybody: typeof process.env.WEBPACK_LEGACY !== 'undefined'
+    }
   })
 
 /**
@@ -189,15 +215,31 @@ const config = {
                 ? optimizeImage
                 : content => content
           }
+        },
+        {
+          from: path.resolve(__dirname, `${srcRelativePath}/assets/sprites/_`),
+          to: 'assets/sprites/[name].[fullhash][ext]'
         }
       ]
     }),
+
+    // If artifacts is outputted to dist,
+    // svg-spritemap-webpack-plugin occurs unexpected and complicated behavior
+    // with copy-webpack-plugin. So output to temporary directory in src
+    // https://github.com/cascornelissen/svg-spritemap-webpack-plugin/issues/157
+    createSVGSpritemapPlugin(
+      path.resolve(__dirname, `${srcRelativePath}/assets/sprites/index/*.svg`),
+      `../${srcRelativePath}/assets/sprites/_/index.svg`
+    ),
+    createSVGSpritemapPlugin(
+      path.resolve(__dirname, `${srcRelativePath}/assets/sprites/foobar/*.svg`),
+      `../${srcRelativePath}/assets/sprites/_/foobar.svg`
+    ),
 
     createHtmlWebpackPlugin(
       path.resolve(__dirname, `${srcRelativePath}/templates/index.ejs`),
       'index.html'
     ),
-
     createHtmlWebpackPlugin(
       path.resolve(__dirname, `${srcRelativePath}/templates/foobar.ejs`),
       'foobar.html'
@@ -205,16 +247,14 @@ const config = {
 
     new MiniCssExtractPlugin({
       filename: 'assets/stylesheets/[name].[fullhash].css'
+    }),
+
+    new WebpackManifestPlugin({
+      generate: optimizeManifests,
+      // https://github.com/shellscape/webpack-manifest-plugin/issues/229
+      publicPath: ''
     })
   ]
 }
-
-config.plugins.push(
-  new WebpackManifestPlugin({
-    generate: optimizeManifests,
-    // https://github.com/shellscape/webpack-manifest-plugin/issues/229
-    publicPath: ''
-  })
-)
 
 module.exports = config

@@ -24,3 +24,28 @@
     color: red;
   }
 }
+
+[data-svg-sprite] {
+  display: none;
+}
+
+.image {
+  display: block;
+}
+
+.link-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.link-item + .link-item {
+  margin-left: 10px;
+}
+
+.link-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
