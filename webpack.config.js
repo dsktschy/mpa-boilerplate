@@ -122,8 +122,9 @@ const optimizeImage = async (content, absoluteFrom) => {
   const image = imagePool.ingestImage(content)
   let encodedImage = null
   try {
-    await imagePool.close()
     await image.encode(squooshConfig)
+    // imagePool must be closed after image.encode
+    await imagePool.close()
     encodedImage = await image.encodedWith[encoder]
   } catch (error) {
     console.error(error)
