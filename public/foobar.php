@@ -16,8 +16,12 @@ require_once dirname(__FILE__) . '/inc/h.php';
       ? get_stylesheet_directory()
       : dirname(__FILE__);
     $spriteSvgPath = $documentRootPath . h('/assets/sprites/foobar.svg', false);
-    if (file_exists($spriteSvgPath)) echo file_get_contents($spriteSvgPath);
   ?>
+  <?php if (file_exists($spriteSvgPath)): ?>
+  <?= file_get_contents($spriteSvgPath) ?>
+  <?php else: ?>
+  <script>console.warn('Please rebuild to copy sprites to dist.')</script>
+  <?php endif; ?>
 
   <h1 class="heading">Foobar | Webpack Boilerplate</h1>
 

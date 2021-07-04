@@ -215,14 +215,20 @@ const config = {
 
     new CleanWebpackPlugin(),
 
+    // noErrorOnMissing must be true
+    // because each directories may not exist
+    // and SVG sprite artifacts don't exist before first building
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, publicRelativePath)
+          from: path.resolve(__dirname, publicRelativePath),
+          to: '[path][name][ext]',
+          noErrorOnMissing: true
         },
         {
           from: path.resolve(__dirname, `${srcRelativePath}/assets/images`),
           to: 'assets/images/[name].[fullhash][ext]',
+          noErrorOnMissing: true,
           transform: {
             transformer:
               process.env.NODE_ENV === 'production'
@@ -232,7 +238,8 @@ const config = {
         },
         {
           from: path.resolve(__dirname, `${srcRelativePath}/assets/sprites/_`),
-          to: 'assets/sprites/[name].[fullhash][ext]'
+          to: 'assets/sprites/[name].[fullhash][ext]',
+          noErrorOnMissing: true
         }
       ]
     }),

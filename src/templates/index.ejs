@@ -7,7 +7,12 @@
   <link href="<%- h('assets/stylesheets/index.css') %>" rel="stylesheet">
 </head>
 <body>
-  <%= compilation.assets[h('assets/sprites/index.svg')].source() %>
+  <% const asset = compilation.assets[h('assets/sprites/index.svg')] %>
+  <% if (asset) { %>
+  <%= asset.source() %>
+  <% } else { %>
+  <script>console.warn('Please rebuild to copy sprites to dist.')</script>
+  <% } %>
 
   <h1 class="heading">Webpack Boilerplate</h1>
 

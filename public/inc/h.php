@@ -12,15 +12,18 @@ if (!function_exists('h')) {
     $rootRelative = substr($path, 0, 1) === '/';
     $relativePath = $rootRelative ? substr($path, 1) : $path;
     if (!$relativePath) {
-      throw new Exception("`{$path}` doesn't exist in manifest.json.");
+      error_log("`{$path}` doesn't exist in manifest.json.");
+      return $path;
     }
     $manifestAbsolutePath = dirname(__FILE__, 2) . '/manifest.json';
     if (!file_exists($manifestAbsolutePath)) {
-      throw new Exception("manifest.json doesn't exist.");
+      error_log("manifest.json doesn't exist.");
+      return $path;
     }
     $manifests = json_decode(file_get_contents($manifestAbsolutePath), true);
     if (!isset($manifests[$relativePath])) {
-      throw new Exception("`{$path}` doesn't exist in manifest.json.");
+      error_log("`{$path}` doesn't exist in manifest.json.");
+      return $path;
     }
     return $uri && function_exists('get_stylesheet_directory_uri')
       ? get_stylesheet_directory_uri() . '/' . $manifests[$relativePath]
