@@ -7,8 +7,9 @@ require_once dirname(__FILE__) . '/inc/h.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Foobar | Webpack Boilerplate</title>
   <link href="<?= h('assets/stylesheets/foobar.css') ?>" rel="stylesheet">
+  <link href="favicon.ico" rel="icon">
+  <title>Foobar | Webpack Boilerplate</title>
 </head>
 <body>
   <?php
