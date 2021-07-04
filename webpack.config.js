@@ -50,6 +50,7 @@ const createHtmlWebpackPlugin = (template, filename, templateParameters = {}) =>
         const rootRelative = _path.startsWith('/')
         const relativePath = rootRelative ? _path.slice(1) : _path
         if (!relativePath) {
+          // eslint-disable-next-line
           console.error(`\`${_path}\` doesn't exist in manifest.json.`)
           return ''
         }
@@ -129,6 +130,7 @@ const optimizeImage = async (content, absoluteFrom) => {
     await imagePool.close()
     encodedImage = await image.encodedWith[encoder]
   } catch (error) {
+    // eslint-disable-next-line
     console.error(error)
     return content
   }
