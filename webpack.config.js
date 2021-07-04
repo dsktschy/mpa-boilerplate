@@ -135,6 +135,9 @@ const optimizeImage = async (content, absoluteFrom) => {
   return Buffer.from(encodedImage.binary)
 }
 
+/**
+ * Configuration object
+ */
 const config = {
   entry: {
     index: path.resolve(__dirname, `${srcRelativePath}/assets/index.ts`),
@@ -267,6 +270,7 @@ const config = {
 
     new WebpackManifestPlugin({
       generate: optimizeManifests,
+      // Avoid unexpected prefix to manifest values
       // https://github.com/shellscape/webpack-manifest-plugin/issues/229
       publicPath: ''
     })
