@@ -13,6 +13,8 @@ const svgoConfig = require('./.svgorc.js')
 
 dotenv.config()
 
+const productionMode = process.env.NODE_ENV === 'production'
+const legacyMode = typeof process.env.WEBPACK_LEGACY !== 'undefined'
 const srcRelativePath =
   process.env.WEBPACK_SRC_RELATIVE_PATH?.replace(/\/$/, '') || 'src'
 const publicRelativePath =
@@ -76,7 +78,7 @@ const createSVGSpritemapPlugin = (input, filename) =>
     output: {
       filename,
       svgo: svgoConfig,
-      svg4everybody: typeof process.env.WEBPACK_LEGACY !== 'undefined'
+      svg4everybody: legacyMode
     }
   })
 
@@ -150,14 +152,14 @@ const config = {
         test: [/\.ts$/, /\.js$/],
         exclude: /node_modules/,
         use: [
-          typeof process.env.WEBPACK_LEGACY === 'undefined'
-            ? {
+          legacyMode
+            ? 'ts-loader'
+            : {
                 loader: 'esbuild-loader',
                 options: {
                   loader: 'ts'
                 }
               }
-            : 'ts-loader'
         ]
       },
       {
@@ -169,10 +171,9 @@ const config = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                config:
-                  typeof process.env.WEBPACK_LEGACY === 'undefined'
-                    ? path.resolve(__dirname, '.postcssrc.js')
-                    : path.resolve(__dirname, '.postcssrc.legacy.js')
+                config: legacyMode
+                  ? path.resolve(__dirname, '.postcssrc.legacy.js')
+                  : path.resolve(__dirname, '.postcssrc.js')
               }
             }
           },
@@ -186,10 +187,7 @@ const config = {
     extensions: ['.ts', '.js']
   },
 
-  target:
-    typeof process.env.WEBPACK_LEGACY === 'undefined'
-      ? ['web']
-      : ['web', 'es5'],
+  target: legacyMode ? ['web', 'es5'] : ['web'],
 
   plugins: [
     new BrowserSyncPlugin({
@@ -230,10 +228,7 @@ const config = {
           to: 'assets/images/[name].[fullhash][ext]',
           noErrorOnMissing: true,
           transform: {
-            transformer:
-              process.env.NODE_ENV === 'production'
-                ? optimizeImage
-                : content => content
+            transformer: productionMode ? optimizeImage : content => content
           }
         },
         {
