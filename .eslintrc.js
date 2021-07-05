@@ -3,7 +3,8 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es2021: true
+    es2021: true,
+    'jest/globals': true
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
@@ -18,9 +19,10 @@ module.exports = {
         ecmaVersion: 2021,
         project: 'tsconfig.json'
       },
-      plugins: ['@typescript-eslint'],
+      plugins: ['@typescript-eslint', 'jest'],
       extends: [
         'eslint:recommended',
+        'plugin:jest/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         'prettier'
@@ -32,7 +34,8 @@ module.exports = {
         sourceType: 'module',
         ecmaVersion: 2021
       },
-      extends: ['eslint:recommended', 'prettier']
+      plugins: ['jest'],
+      extends: ['eslint:recommended', 'plugin:jest/recommended', 'prettier']
     }
   ]
 }

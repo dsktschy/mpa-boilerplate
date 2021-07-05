@@ -12,3 +12,4 @@ It is intended for use in cases where the use of static site generators (Next, N
 - Pre-commit Linting
 - Pre-commit Formatting
 - Legacy Browser Support, or not
+- Testing
