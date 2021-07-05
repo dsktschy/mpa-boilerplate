@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/dsktschy/webpack-boilerplate#readme",
   "engines": {
-    "node": ">=14"
+    "node": ">=14",
+    "npm": ">=7"
   },
   "devDependencies": {
     "@squoosh/lib": "^0.3.1",
