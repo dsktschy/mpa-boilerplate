@@ -25,8 +25,20 @@ const distRelativePath =
 
 const config = {
   entry: {
-    index: path.resolve(__dirname, `${srcRelativePath}/assets/index.ts`),
-    foobar: path.resolve(__dirname, `${srcRelativePath}/assets/foobar.ts`)
+    index: [
+      path.resolve(__dirname, `${srcRelativePath}/assets/scripts/index.ts`),
+      path.resolve(
+        __dirname,
+        `${srcRelativePath}/assets/stylesheets/index.scss`
+      )
+    ],
+    foobar: [
+      path.resolve(__dirname, `${srcRelativePath}/assets/scripts/foobar.ts`),
+      path.resolve(
+        __dirname,
+        `${srcRelativePath}/assets/stylesheets/foobar.scss`
+      )
+    ]
   },
 
   output: {
