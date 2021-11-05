@@ -6,11 +6,11 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const svgoConfig = require('./.svgorc.js')
 const { optimizeImage } = require('./lib/copy')
 const { createTemplateParameters } = require('./lib/html')
-const { createGenerate } = require('./lib/manifest')
 
 dotenv.config()
 
@@ -23,27 +23,29 @@ const publicRelativePath =
 const distRelativePath =
   process.env.WEBPACK_DIST_RELATIVE_PATH?.replace(/\/$/, '') || 'dist'
 
-const config = {
+module.exports = {
   entry: {
-    index: [
-      path.resolve(__dirname, `${srcRelativePath}/assets/scripts/index.ts`),
-      path.resolve(
-        __dirname,
-        `${srcRelativePath}/assets/stylesheets/index.scss`
-      )
-    ],
-    foobar: [
-      path.resolve(__dirname, `${srcRelativePath}/assets/scripts/foobar.ts`),
-      path.resolve(
-        __dirname,
-        `${srcRelativePath}/assets/stylesheets/foobar.scss`
-      )
-    ]
+    'assets/scripts/index': path.resolve(
+      __dirname,
+      `${srcRelativePath}/assets/scripts/index.ts`
+    ),
+    'assets/scripts/foobar': path.resolve(
+      __dirname,
+      `${srcRelativePath}/assets/scripts/foobar.ts`
+    ),
+    'assets/stylesheets/index': path.resolve(
+      __dirname,
+      `${srcRelativePath}/assets/stylesheets/index.scss`
+    ),
+    'assets/stylesheets/foobar': path.resolve(
+      __dirname,
+      `${srcRelativePath}/assets/stylesheets/foobar.scss`
+    )
   },
 
   output: {
     path: path.resolve(__dirname, distRelativePath),
-    filename: 'assets/scripts/[name].[fullhash].js'
+    filename: '[name].[fullhash].js'
   },
 
   module: {
@@ -183,19 +185,18 @@ const config = {
       templateParameters: createTemplateParameters({})
     }),
 
+    // Remove empty js file that style entry outputs
+    // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/151
+    new RemoveEmptyScriptsPlugin(),
+
     new MiniCssExtractPlugin({
-      filename: 'assets/stylesheets/[name].[fullhash].css'
+      filename: '[name].[fullhash].css'
+    }),
+
+    new WebpackManifestPlugin({
+      // Avoid unexpected prefix to manifest values
+      // https://github.com/shellscape/webpack-manifest-plugin/issues/229
+      publicPath: ''
     })
   ]
 }
-
-config.plugins.push(
-  new WebpackManifestPlugin({
-    generate: createGenerate(config, 'assets/scripts/', 'assets/stylesheets/'),
-    // Avoid unexpected prefix to manifest values
-    // https://github.com/shellscape/webpack-manifest-plugin/issues/229
-    publicPath: ''
-  })
-)
-
-module.exports = config
