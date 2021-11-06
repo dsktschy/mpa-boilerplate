@@ -14,7 +14,7 @@ const { optimizeImage } = require('./lib/copy')
 dotenv.config()
 
 const productionMode = process.env.NODE_ENV === 'production'
-const legacyMode = typeof process.env.WEBPACK_LEGACY !== 'undefined'
+const legacyMode = process.env.WEBPACK_LEGACY?.toLowerCase() === 'on'
 const srcRelativePath =
   process.env.WEBPACK_SRC_RELATIVE_PATH?.replace(/\/$/, '') || 'src'
 const publicRelativePath =
