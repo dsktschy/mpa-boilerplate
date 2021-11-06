@@ -1,6 +1,6 @@
 <?php
 $dirname = dirname(__FILE__);
-$manifest = json_decode(file_get_contents("{$dirname}/manifest.json"), true);
+$manifest = json_decode(file_get_contents("{$dirname}/asset-manifest.json"), true);
 $_ = function ($path = '') use ($manifest) { return $manifest[$path]; };
 $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
 ?>

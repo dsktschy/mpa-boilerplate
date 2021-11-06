@@ -193,6 +193,7 @@ module.exports = {
     }),
 
     new WebpackManifestPlugin({
+      fileName: 'asset-manifest.json',
       // Avoid unexpected prefix to manifest values, and output root relative paths
       // https://github.com/shellscape/webpack-manifest-plugin/issues/229
       publicPath: process.env.WEBPACK_MANIFEST_PUBLIC_PATH
