@@ -1,51 +1,12 @@
-@keyframes rainbow {
-  0% {
-    color: red;
-  }
-  14.2% {
-    color: orange;
-  }
-  28.5% {
-    color: yellow;
-  }
-  42.8% {
-    color: green;
-  }
-  57.1% {
-    color: blue;
-  }
-  71.4% {
-    color: indigo;
-  }
-  85.7% {
-    color: violet;
-  }
-  100% {
-    color: red;
-  }
-}
-
 [data-svg-sprite] {
   display: none;
 }
 
-.image {
-  display: block;
-}
-
-.link-list {
-  display: flex;
-  align-items: center;
-  list-style: none;
+button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
   padding: 0;
-}
-
-.link-item + .link-item {
-  margin-left: 10px;
-}
-
-.link-icon {
-  display: block;
-  width: 30px;
-  height: 30px;
 }

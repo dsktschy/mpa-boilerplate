@@ -28,17 +28,9 @@ module.exports = {
       __dirname,
       `${srcRelativePath}/assets/scripts/index.ts`
     ),
-    'assets/scripts/foobar': path.resolve(
-      __dirname,
-      `${srcRelativePath}/assets/scripts/foobar.ts`
-    ),
     'assets/stylesheets/index': path.resolve(
       __dirname,
       `${srcRelativePath}/assets/stylesheets/index.scss`
-    ),
-    'assets/stylesheets/foobar': path.resolve(
-      __dirname,
-      `${srcRelativePath}/assets/stylesheets/foobar.scss`
     )
   },
 
@@ -154,16 +146,6 @@ module.exports = {
         }
       }
     ),
-    new SVGSpritemapPlugin(
-      path.resolve(__dirname, `${srcRelativePath}/assets/sprites/foobar/*.svg`),
-      {
-        output: {
-          filename: `../${srcRelativePath}/assets/sprites/_/foobar.svg`,
-          svgo: svgoConfig,
-          svg4everybody: legacyMode
-        }
-      }
-    ),
 
     new HtmlWebpackPlugin({
       template: path.resolve(
@@ -171,15 +153,6 @@ module.exports = {
         `${srcRelativePath}/templates/index.ejs`
       ),
       filename: 'index.html',
-      inject: false,
-      templateParameters: {}
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(
-        __dirname,
-        `${srcRelativePath}/templates/foobar.ejs`
-      ),
-      filename: 'foobar.html',
       inject: false,
       templateParameters: {}
     }),
