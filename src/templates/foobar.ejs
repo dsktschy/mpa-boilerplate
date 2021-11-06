@@ -1,25 +1,26 @@
+<%
+const { hash, assets } = compilation
+const $_ = (path = '') => path.replace(/(.*)(\.[^\.]+$)/, `/$1.${hash}$2`)
+const spriteSvg = assets[`assets/sprites/foobar.svg`].source()
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="<%- h('assets/stylesheets/foobar.css') %>" rel="stylesheet">
+  <link href="<%= $_('assets/stylesheets/foobar.css') %>" rel="stylesheet">
   <link href="favicon.ico" rel="icon">
   <title>Foobar | Webpack Boilerplate</title>
 </head>
 <body>
-  <% const asset = compilation.assets[h('assets/sprites/foobar.svg')] %>
-  <% if (asset) { %>
-  <%= asset.source() %>
-  <% } else { %>
-  <script>console.warn('Please rebuild to copy sprites to dist.')</script>
-  <% } %>
+  <%= spriteSvg %>
 
   <h1 class="heading">Foobar | Webpack Boilerplate</h1>
 
   <picture>
-    <source type="image/webp" srcset="<%- h('assets/images/logo.webp') %>" />
-    <img src="<%- h('assets/images/logo.jpg') %>" class="image"/>
+    <source type="image/webp" srcset="<%= $_('assets/images/logo.webp') %>" />
+    <img src="<%= $_('assets/images/logo.jpg') %>" class="image"/>
   </picture>
 
   <ul class="link-list">
@@ -43,6 +44,6 @@
     </li>
   </ul>
 
-  <script src="<%- h('assets/scripts/foobar.js') %>"></script>
+  <script src="<%= $_('assets/scripts/foobar.js') %>"></script>
 </body>
 </html>

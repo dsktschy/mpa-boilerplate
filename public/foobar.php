@@ -1,34 +1,27 @@
 <?php
-// This line should be removed in WordPress project
-require_once dirname(__FILE__) . '/inc/h.php';
+$dirname = dirname(__FILE__);
+$manifest = json_decode(file_get_contents("{$dirname}/manifest.json"), true);
+$_ = function ($path = '') use ($manifest) { return $manifest[$path]; };
+$spriteSvg = file_get_contents("{$dirname}/assets/sprites/foobar.svg");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="<?= h('assets/stylesheets/foobar.css') ?>" rel="stylesheet">
+  <link href="<?= $_('assets/stylesheets/foobar.css') ?>" rel="stylesheet">
   <link href="favicon.ico" rel="icon">
   <title>Foobar | Webpack Boilerplate</title>
 </head>
 <body>
-  <?php
-    $documentRootPath = function_exists('get_stylesheet_directory')
-      ? get_stylesheet_directory()
-      : dirname(__FILE__);
-    $spriteSvgPath = $documentRootPath . h('/assets/sprites/foobar.svg', false);
-  ?>
-  <?php if (file_exists($spriteSvgPath)): ?>
-  <?= file_get_contents($spriteSvgPath) ?>
-  <?php else: ?>
-  <script>console.warn('Please rebuild to copy sprites to dist.')</script>
-  <?php endif; ?>
+  <?= $spriteSvg ?>
 
   <h1 class="heading">Foobar | Webpack Boilerplate</h1>
 
   <picture>
-    <source type="image/webp" srcset="<?= h('assets/images/logo.webp') ?>" />
-    <img src="<?= h('assets/images/logo.jpg') ?>" class="image"/>
+    <source type="image/webp" srcset="<?= $_('assets/images/logo.webp') ?>" />
+    <img src="<?= $_('assets/images/logo.jpg') ?>" class="image"/>
   </picture>
 
   <ul class="link-list">
@@ -52,6 +45,6 @@ require_once dirname(__FILE__) . '/inc/h.php';
     </li>
   </ul>
 
-  <script src="<?= h('assets/scripts/foobar.js') ?>"></script>
+  <script src="<?= $_('assets/scripts/foobar.js') ?>"></script>
 </body>
 </html>

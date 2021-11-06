@@ -1,38 +1,30 @@
 <?php
-// This line should be removed in WordPress project
-require_once dirname(__FILE__) . '/inc/h.php';
+$dirname = dirname(__FILE__);
+$manifest = json_decode(file_get_contents("{$dirname}/manifest.json"), true);
+$_ = function ($path = '') use ($manifest) { return $manifest[$path]; };
+$spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="<?= h('assets/stylesheets/index.css') ?>" rel="stylesheet">
+  <link href="<?= $_('assets/stylesheets/index.css') ?>" rel="stylesheet">
   <link href="favicon.ico" rel="icon">
   <title>Webpack Boilerplate</title>
 </head>
 <body>
-  <?php
-    $documentRootPath = function_exists('get_stylesheet_directory')
-      ? get_stylesheet_directory()
-      : dirname(__FILE__);
-    $spriteSvgPath = $documentRootPath . h('/assets/sprites/index.svg', false);
-  ?>
-  <?php if (file_exists($spriteSvgPath)): ?>
-  <?= file_get_contents($spriteSvgPath) ?>
-  <?php else: ?>
-  <script>console.warn('Please rebuild to copy sprites to dist.')</script>
-  <?php endif; ?>
+  <?= $spriteSvg ?>
 
   <h1 class="heading">Webpack Boilerplate</h1>
 
   <picture>
-    <source type="image/webp" srcset="<?= h('assets/images/logo.webp') ?>" />
-    <img src="<?= h('assets/images/logo.png') ?>" class="image" />
+    <source type="image/webp" srcset="<?= $_('assets/images/logo.webp') ?>" />
+    <img src="<?= $_('assets/images/logo.png') ?>" class="image" />
   </picture>
 
   <ul class="link-list">
-    <?php if (!function_exists('get_stylesheet_directory')): ?>
     <li class="link-item">
       <a href="foobar.php">
         <svg class="link-icon">
@@ -40,7 +32,6 @@ require_once dirname(__FILE__) . '/inc/h.php';
         </svg>
       </a>
     </li>
-    <?php endif; ?>
     <li class="link-item">
       <a
         href="https://github.com/dsktschy/webpack-boilerplate"
@@ -54,6 +45,6 @@ require_once dirname(__FILE__) . '/inc/h.php';
     </li>
   </ul>
 
-  <script src="<?= h('assets/scripts/index.js') ?>"></script>
+  <script src="<?= $_('assets/scripts/index.js') ?>"></script>
 </body>
 </html>

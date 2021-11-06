@@ -10,7 +10,6 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const svgoConfig = require('./.svgorc.js')
 const { optimizeImage } = require('./lib/copy')
-const { createTemplateParameters } = require('./lib/html')
 
 dotenv.config()
 
@@ -135,7 +134,7 @@ module.exports = {
         },
         {
           from: path.resolve(__dirname, `${srcRelativePath}/assets/sprites/_`),
-          to: 'assets/sprites/[name].[fullhash][ext]',
+          to: 'assets/sprites/[name][ext]',
           noErrorOnMissing: true
         }
       ]
@@ -173,7 +172,7 @@ module.exports = {
       ),
       filename: 'index.html',
       inject: false,
-      templateParameters: createTemplateParameters({})
+      templateParameters: {}
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(
@@ -182,7 +181,7 @@ module.exports = {
       ),
       filename: 'foobar.html',
       inject: false,
-      templateParameters: createTemplateParameters({})
+      templateParameters: {}
     }),
 
     // Remove empty js file that style entry outputs
@@ -194,9 +193,9 @@ module.exports = {
     }),
 
     new WebpackManifestPlugin({
-      // Avoid unexpected prefix to manifest values
+      // Avoid unexpected prefix to manifest values, and output root relative paths
       // https://github.com/shellscape/webpack-manifest-plugin/issues/229
-      publicPath: ''
+      publicPath: process.env.WEBPACK_MANIFEST_PUBLIC_PATH
     })
   ]
 }

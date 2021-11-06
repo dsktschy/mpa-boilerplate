@@ -1,2 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '/inc/h.php';
+// Remove following files if not WordPress
+// - function.php
+// - screenshot.png
+// - style.css
