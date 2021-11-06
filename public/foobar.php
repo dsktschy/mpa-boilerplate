@@ -8,10 +8,10 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/foobar.svg");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="<?= $_('assets/stylesheets/foobar.css') ?>" rel="stylesheet">
-  <link href="favicon.ico" rel="icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="<?= $_('assets/stylesheets/foobar.css') ?>" rel="stylesheet" />
+  <link href="favicon.ico" rel="icon" />
   <title>Foobar | Webpack Boilerplate</title>
 </head>
 <body>
@@ -21,7 +21,7 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/foobar.svg");
 
   <picture>
     <source type="image/webp" srcset="<?= $_('assets/images/logo.webp') ?>" />
-    <img src="<?= $_('assets/images/logo.jpg') ?>" class="image"/>
+    <img src="<?= $_('assets/images/logo.jpg') ?>" class="image" />
   </picture>
 
   <ul class="link-list">

@@ -8,10 +8,10 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="<?= $_('assets/stylesheets/index.css') ?>" rel="stylesheet">
-  <link href="favicon.ico" rel="icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="<?= $_('assets/stylesheets/index.css') ?>" rel="stylesheet" />
+  <link href="favicon.ico" rel="icon" />
   <title>Webpack Boilerplate</title>
 </head>
 <body>
