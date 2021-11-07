@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const bsConfig = require('./bs-config.js')
-const svgoConfig = require('./.svgorc.js')
+const svgoConfig = require('./svgo.config.js')
 
 const legacyMode = process.env.WEBPACK_LEGACY?.toLowerCase() === 'on'
 
