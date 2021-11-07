@@ -1,7 +1,6 @@
-# Webpack Boilerplate
+# MPA Boilerplate
 
-A boilerplate for web front-end, based on Webpack.
-It is intended for use in cases where the use of static site generators (Next, Nuxt, etc.) is not suitable (WordPress themes, server-side templates, etc.).
+A boilerplate for multi-page web application.
 
 - TypeScript / JavaScript
 - SCSS / CSS

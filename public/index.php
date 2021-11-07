@@ -12,12 +12,12 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link href="<?= $_('assets/stylesheets/index.css') ?>" rel="stylesheet" />
   <link href="favicon.ico" rel="icon" />
-  <title>Webpack Boilerplate</title>
+  <title>MPA Boilerplate</title>
 </head>
 <body>
   <?= $spriteSvg ?>
 
-  <h1 class="heading" data-target>Webpack Boilerplate</h1>
+  <h1 class="heading" data-target>MPA Boilerplate</h1>
 
   <picture>
     <source type="image/webp" srcset="<?= $_('assets/images/logo.webp') ?>" />
@@ -34,7 +34,7 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
     </li>
     <li class="item">
       <a
-        href="https://github.com/dsktschy/webpack-boilerplate"
+        href="https://github.com/dsktschy/mpa-boilerplate"
         target="_blank"
         rel="noopener noreferrer"
         class="trigger"

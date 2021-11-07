@@ -1,7 +1,7 @@
 {
-  "name": "webpack-boilerplate",
+  "name": "mpa-boilerplate",
   "version": "0.0.0",
-  "description": "A boilerplate for web front-end, based on Webpack",
+  "description": "A boilerplate for multi-page web application",
   "scripts": {
     "test": "jest",
     "prepare": "husky install",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dsktschy/webpack-boilerplate.git"
+    "url": "git+https://github.com/dsktschy/mpa-boilerplate.git"
   },
   "author": "dsktschy (https://github.com/dsktschy)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dsktschy/webpack-boilerplate/issues"
+    "url": "https://github.com/dsktschy/mpa-boilerplate/issues"
   },
-  "homepage": "https://github.com/dsktschy/webpack-boilerplate#readme",
+  "homepage": "https://github.com/dsktschy/mpa-boilerplate#readme",
   "engines": {
     "node": ">=14",
     "npm": ">=7"
