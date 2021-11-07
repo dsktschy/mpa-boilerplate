@@ -89,6 +89,9 @@ module.exports = {
             process.env.WEBPACK_PUBLIC_RELATIVE_PATH
           ),
           to: '[path][name][ext]',
+          globOptions: {
+            ignore: ['**/.*']
+          },
           noErrorOnMissing: true
         },
         {
@@ -97,6 +100,9 @@ module.exports = {
             `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/images`
           ),
           to: 'assets/images/[name].[fullhash][ext]',
+          globOptions: {
+            ignore: ['**/.*']
+          },
           noErrorOnMissing: true
         },
         {
@@ -105,6 +111,9 @@ module.exports = {
             `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/sprites/_`
           ),
           to: 'assets/sprites/[name][ext]',
+          globOptions: {
+            ignore: ['**/.*']
+          },
           noErrorOnMissing: true
         }
       ]
