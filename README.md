@@ -6,7 +6,6 @@ It is intended for use in cases where the use of static site generators (Next, N
 - TypeScript / JavaScript
 - SCSS / CSS
 - Server-side Templates / HTML
-- Image Optimization
 - SVG Sprites
 - Cache Busting
 - Pre-commit Linting

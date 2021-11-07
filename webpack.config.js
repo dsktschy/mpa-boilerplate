@@ -10,9 +10,7 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const bsConfig = require('./bs-config.js')
 const svgoConfig = require('./.svgorc.js')
-const { optimizeImage } = require('./lib/copy')
 
-const productionMode = process.env.NODE_ENV === 'production'
 const legacyMode = process.env.WEBPACK_LEGACY?.toLowerCase() === 'on'
 
 module.exports = {
@@ -99,10 +97,7 @@ module.exports = {
             `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/images`
           ),
           to: 'assets/images/[name].[fullhash][ext]',
-          noErrorOnMissing: true,
-          transform: {
-            transformer: productionMode ? optimizeImage : content => content
-          }
+          noErrorOnMissing: true
         },
         {
           from: path.resolve(
