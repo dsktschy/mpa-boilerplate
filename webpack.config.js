@@ -1,5 +1,5 @@
+require('dotenv').config()
 const path = require('path')
-const dotenv = require('dotenv')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
@@ -8,10 +8,10 @@ const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
+const bsConfig = require('./bs-config.js')
 const svgoConfig = require('./.svgorc.js')
 const { optimizeImage } = require('./lib/copy')
 
-dotenv.config()
 const productionMode = process.env.NODE_ENV === 'production'
 const legacyMode = process.env.WEBPACK_LEGACY?.toLowerCase() === 'on'
 
@@ -76,28 +76,7 @@ module.exports = {
   target: legacyMode ? ['web', 'es5'] : ['web'],
 
   plugins: [
-    new BrowserSyncPlugin({
-      host: process.env.WEBPACK_BROWSER_SYNC_HOST || 'localhost',
-      port: process.env.WEBPACK_BROWSER_SYNC_PORT || 3000,
-      proxy: process.env.WEBPACK_BROWSER_SYNC_PROXY || false,
-      server: process.env.WEBPACK_BROWSER_SYNC_PROXY
-        ? false
-        : process.env.WEBPACK_DIST_RELATIVE_PATH,
-      https:
-        !!process.env.WEBPACK_BROWSER_SYNC_HTTPS_CERT &&
-        !!process.env.WEBPACK_BROWSER_SYNC_HTTPS_KEY
-          ? {
-              cert: process.env.WEBPACK_BROWSER_SYNC_HTTPS_CERT,
-              key: process.env.WEBPACK_BROWSER_SYNC_HTTPS_KEY
-            }
-          : false,
-      open: false,
-      files: [process.env.WEBPACK_DIST_RELATIVE_PATH],
-      // This setting doesn't work now
-      // Reloading connot be avoid even if changed file is CSS
-      // https://github.com/Va1/browser-sync-webpack-plugin/pull/79
-      injectChanges: true
-    }),
+    new BrowserSyncPlugin(bsConfig),
 
     new CleanWebpackPlugin(),
 
