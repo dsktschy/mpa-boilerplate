@@ -6,6 +6,7 @@ A boilerplate for multi-page web application.
 - SCSS / CSS
 - Server-side Templates / HTML
 - SVG Sprites
+- Image Optimization
 - Cache Busting
 - Pre-commit Linting
 - Pre-commit Formatting

@@ -19,10 +19,7 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
 
   <h1 class="heading" data-target>MPA Boilerplate</h1>
 
-  <picture>
-    <source type="image/webp" srcset="<?= $_('assets/images/logo.webp') ?>" />
-    <img src="<?= $_('assets/images/logo.png') ?>" class="image" />
-  </picture>
+  <img src="<?= $_('assets/images/logo.png') ?>" class="image" />
 
   <ul class="list">
     <li class="item">
