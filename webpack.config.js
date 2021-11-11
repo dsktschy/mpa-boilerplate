@@ -20,7 +20,7 @@ module.exports = {
     ),
     'assets/styles/index': path.resolve(
       __dirname,
-      `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/styles/index.scss`
+      `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/styles/index.css`
     )
   },
 
@@ -46,7 +46,7 @@ module.exports = {
         ]
       },
       {
-        test: [/\.scss$/, /\.css$/],
+        test: [/\.css$/],
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
@@ -59,8 +59,7 @@ module.exports = {
                   : path.resolve(__dirname, '.postcssrc.js')
               }
             }
-          },
-          'sass-loader'
+          }
         ]
       }
     ]

@@ -2,8 +2,10 @@
 
 A boilerplate for multi-page web application.
 
+## Features
+
 - TypeScript / JavaScript
-- SCSS / CSS
+- PostCSS / CSS
 - Server-side Templates / HTML
 - SVG Sprites
 - Image Optimization
@@ -12,3 +14,7 @@ A boilerplate for multi-page web application.
 - Pre-commit Formatting
 - Legacy Browser Support, or not
 - Testing
+
+## Variants
+
+- [SCSS](../../tree/scss)
