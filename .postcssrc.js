@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
-    require('postcss-preset-env')({
-      browsers: 'defaults, not IE 11'
+    require('autoprefixer')({
+      overrideBrowserslist: ['defaults', 'iOS >= 9', 'not ie 11']
     })
   ]
 }
