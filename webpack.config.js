@@ -6,7 +6,6 @@ const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts')
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin')
 const bsConfig = require('./bs-config.js')
 const svgoConfig = require('./svgo.config.js')
@@ -76,7 +75,15 @@ module.exports = {
   plugins: [
     new BrowserSyncPlugin(bsConfig),
 
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      // Remove unnecessary output files
+      // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/151
+      protectWebpackAssets: false,
+      cleanAfterEveryBuildPatterns: [
+        'assets/stylesheets/**/*',
+        '!assets/stylesheets/**/*.css'
+      ]
+    }),
 
     // noErrorOnMissing must be true
     // because each directories may not exist
@@ -146,10 +153,6 @@ module.exports = {
       inject: false,
       templateParameters: {}
     }),
-
-    // Remove empty js file that style entry outputs
-    // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/151
-    new RemoveEmptyScriptsPlugin(),
 
     new MiniCssExtractPlugin({
       filename: '[name].[fullhash].css'
