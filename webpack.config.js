@@ -18,9 +18,9 @@ module.exports = {
       __dirname,
       `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/scripts/index.ts`
     ),
-    'assets/stylesheets/index': path.resolve(
+    'assets/styles/index': path.resolve(
       __dirname,
-      `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/stylesheets/index.scss`
+      `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/styles/index.scss`
     )
   },
 
@@ -80,8 +80,8 @@ module.exports = {
       // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/151
       protectWebpackAssets: false,
       cleanAfterEveryBuildPatterns: [
-        'assets/stylesheets/**/*',
-        '!assets/stylesheets/**/*.css'
+        'assets/styles/**/*',
+        '!assets/styles/**/*.css'
       ]
     }),
 
