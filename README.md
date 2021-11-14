@@ -5,7 +5,7 @@ A boilerplate for multi-page web application.
 ## Features
 
 - TypeScript / JavaScript
-- PostCSS / CSS
+- PostCSS (Tailwind) / CSS
 - Server-side Templates / HTML
 - SVG Sprites
 - Image Optimization

@@ -5,7 +5,8 @@ module.exports = {
       params: {
         attributes: [
           {
-            'data-svg-sprite': 'data-svg-sprite'
+            // Don't use display, visibility, and opacity because empty svg element is output
+            style: 'position: fixed; z-index: -1;'
           }
         ]
       }

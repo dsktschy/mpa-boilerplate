@@ -17,26 +17,26 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
 <body>
   <?= $spriteSvg ?>
 
-  <h1 class="heading" data-target>MPA Boilerplate</h1>
+  <h1 class="text-5xl font-bold" data-target>MPA Boilerplate</h1>
 
-  <img src="<?= $_('assets/images/logo.png') ?>" class="image" />
+  <img src="<?= $_('assets/images/logo.png') ?>" class="block" />
 
-  <ul class="list">
-    <li class="item">
-      <button class="trigger" data-trigger>
-        <svg class="icon">
+  <ul class="flex items-center">
+    <li>
+      <button class="align-top" data-trigger>
+        <svg class="w-8 h-8 align-top">
           <use xlink:href="#sprite-flask"></use>
         </svg>
       </button>
     </li>
-    <li class="item">
+    <li class="ml-2.5">
       <a
         href="https://github.com/dsktschy/mpa-boilerplate"
         target="_blank"
         rel="noopener noreferrer"
-        class="trigger"
+        class="align-top"
       >
-        <svg class="icon">
+        <svg class="w-8 h-8 align-top">
           <use xlink:href="#sprite-github"></use>
         </svg>
       </a>
