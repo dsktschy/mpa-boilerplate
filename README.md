@@ -18,3 +18,10 @@ A boilerplate for multi-page web application.
 ## Variants
 
 - [Standard](../../tree/main)
+
+## Usage
+
+1. Copy `.env-sample`, rename it to `.env`, and edit it.
+2. Run `npm i` to install packages.
+3. Run `npm run dev` to develop.
+4. Run `npm run build` to generate files for production.
