@@ -105,6 +105,3 @@ dist
 
 # Visual Studio Code
 .vscode/
-
-# SVG Sprite
-src/assets/sprites/_
