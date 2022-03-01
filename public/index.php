@@ -11,7 +11,7 @@ $spriteSvg = file_get_contents("{$dirname}/assets/sprites/index.svg");
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link href="<?= $_('assets/styles/index.css') ?>" rel="stylesheet" />
-  <link href="favicon.ico" rel="icon" />
+  <link href="<?= $_('assets/images/favicon.ico') ?>" rel="icon" />
   <title>MPA Boilerplate</title>
 </head>
 <body>
