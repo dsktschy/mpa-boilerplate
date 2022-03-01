@@ -86,7 +86,6 @@ module.exports = {
 
     // noErrorOnMissing must be true
     // because each directories may not exist
-    // and SVG sprite artifacts don't exist before first building
     new CopyPlugin({
       patterns: [
         {
@@ -110,25 +109,10 @@ module.exports = {
             ignore: ['**/.*']
           },
           noErrorOnMissing: true
-        },
-        {
-          from: path.resolve(
-            __dirname,
-            `${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/sprites/_`
-          ),
-          to: 'assets/sprites/[name][ext]',
-          globOptions: {
-            ignore: ['**/.*']
-          },
-          noErrorOnMissing: true
         }
       ]
     }),
 
-    // If artifacts is outputted to dist,
-    // svg-spritemap-webpack-plugin occurs unexpected and complicated behavior
-    // with copy-webpack-plugin. So output to temporary directory in src
-    // https://github.com/cascornelissen/svg-spritemap-webpack-plugin/issues/157
     new SVGSpritemapPlugin(
       path.resolve(
         __dirname,
@@ -136,7 +120,7 @@ module.exports = {
       ),
       {
         output: {
-          filename: `../${process.env.WEBPACK_SRC_RELATIVE_PATH}/assets/sprites/_/index.svg`,
+          filename: 'assets/sprites/index.svg',
           svgo: svgoConfig,
           svg4everybody: legacyMode
         }

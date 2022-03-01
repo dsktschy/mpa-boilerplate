@@ -1,7 +1,7 @@
 <%
 const { hash, assets } = compilation
 const $_ = (path = '') => path.replace(/(.*)(\.[^\.]+$)/, `/$1.${hash}$2`)
-const spriteSvg = assets[`assets/sprites/index.svg`].source()
+const spriteSvg = assets['assets/sprites/index.svg'].source()
 %>
 
 <!DOCTYPE html>
