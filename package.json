@@ -46,7 +46,7 @@
     "prettier": "^2.3.1",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
-    "sharp": "^0.29.2",
+    "sharp": "^0.30.7",
     "stylelint": "^14.0.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard-scss": "^2.0.1",
