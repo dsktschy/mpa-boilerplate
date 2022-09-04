@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/dsktschy/mpa-boilerplate#readme",
   "engines": {
-    "node": ">=14",
     "npm": ">=7"
   },
   "devDependencies": {
