@@ -48,7 +48,7 @@
     "stylelint": "^14.0.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^23.0.0",
-    "svg-spritemap-webpack-plugin": "^4.0.3",
+    "svg-spritemap-webpack-plugin": "^4.5.0",
     "tailwindcss": "^2.2.19",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
